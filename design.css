@@ -1,0 +1,82 @@
+*{margin: 0px; padding: 0px}
+#wrapper{
+	margin: auto;
+	height: auto;
+	width: 90%;
+}
+header{
+	height: 150px;
+	width: 100%;
+	box-shadow: 0px 0px 5px  black;
+}
+#headertop{
+	height: 75px;
+	width: 100%;
+	background-color: #cce6ff;
+}
+#headermenu{
+	height: 75px;
+	width: 100%;
+	background-color: #391339;
+	box-shadow: 0px 0px 5px  black;
+}
+#headermenu a{
+	text-decoration: none;
+	color: white;
+	margin-left: 13%;
+}
+#container{
+	float: left;
+	height: 450px;
+	width: 100%;
+}
+aside{
+	float: left;
+	height: 450px;
+	width: 30%;
+	background-color: #d9e8f7;
+	box-shadow: 0px 0px 5px  black;
+}
+aside button{
+	margin-top: 11.5%;
+	margin-left: 30%;
+}
+#content{
+	float: left;
+	height: 450px;
+	width: 70%;
+	background-color: white;
+	box-shadow: 0px 0px 5px  black;
+}
+#contentfirsthalf{
+	float: left;
+	width: 40%;
+	height: 450px;
+	background-color: #e6faff;
+}
+#contentsecondhalf{
+	float: left;
+	width: 60%;
+	height: 450px;
+	background-color: #ccf5ff;
+}
+#eventform{
+	float:  left;
+	height: 400px;
+	width: 40%;
+}
+#stdform{
+	float: left;
+	height: 400px;
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 2%;
+	background: gray;
+}
+#footer{
+	float: left;
+	height: 70px;
+	width: 100%;
+	background-color: black;
+	box-shadow: 0px 0px 5px  black;
+}

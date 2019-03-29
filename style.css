@@ -1,0 +1,16 @@
+*{margin: 0;padding: 0;}
+form{
+	text-align: center;	
+}
+.b_img
+{
+	background-image: url(Images/Image1.png);
+}
+.field{
+	padding: 1%;
+}
+.background{
+	background-image: url(Images/Image3.jpg);
+}
+
+
