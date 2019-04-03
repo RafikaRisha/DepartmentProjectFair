@@ -12,7 +12,7 @@ if(!$_SESSION['email'])
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="design.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css">
-	<!-- <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script> -->
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<title>Evaluation</title>
 </head>
@@ -41,34 +41,49 @@ if(!$_SESSION['email'])
 			</aside>	
 
 		<div id="content">
+		<form action="new-add.php" method="POST">
+			<label>Select Type</label><br>
+			<select name="category">
+			<option id="web">Web Application</option>
+			<option id="desktop">Desktop Application</option>
+			<option id="mobile">Mobile Application</option>
+			<option id="hardware">Hardware Application</option>
+		</select><br><br>
+		<input type="submit" class="btn btn-success" name="Submit">
+		</form>
 		<?php
 		include_once("crud.php");
 		$crud = new crud();
 
-		$query = "SELECT * FROM project_result";
-		$result = $crud->getData($query);
+		if(isset($_POST['Submit']))
+		{
+			$category = $_POST['category'];
+			$query = "SELECT project_id, student_id FROM participants WHERE category='$category'";
+			$result = $crud->getData($query);
 		?>
-		<table border="1">
-		
-		<th> Project ID </th>
-		<th> Student ID </th>
-		<th> Marks </th>
-		<th> Action </th>
+			<form method="POST" action="new-add.php">
+			<table border="1">
+			<th> Project ID </th>
+			<th> Student ID </th>
+			<th>Marks</th>
 		<?php 
-		foreach ($result as $key => $res) 
-		{	
-			echo "<tr>";
-			
-			echo "<td>".$res['project_id']."</td>";
-			echo "<td>".$res['student_id']."</td>";
-			echo "<td>".$res['marks']."</td>";
-			echo "<td><a href=\"marksEntry.php?project_id=$res[project_id]\">Edit</a></td>";
+			foreach ($result as $key => $res) 
+			{	
+				echo "<tr>";
+				echo "<td>".$res['project_id']."</td>";
+				echo "<td>".$res['student_id']."</td>";
+				echo "<td><a href='marksEntry.php?project_id=$res[project_id]&student_id=$res[student_id]'>Assign marks</a></td>";	
 			echo "</tr>";
-		}
-		echo "</table>";
+			}	
+			echo "</table>";	
+	}
 		?>
+		</form>
 		
 		</div>
+			
+		</div>
+
 		<div id = "footer"></div>
 	</div>
 

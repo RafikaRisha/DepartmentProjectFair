@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!$_SESSION['email'])
+{
+	header("location:login.php");
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,10 +33,10 @@
 
 		<div id = "container">
 			<aside>
-				<button class="btn btn-success col-sm-4">Languages</button>
-				<button class="btn btn-warning col-sm-4">Previous Project List</button>
-				<button class="btn btn-info col-sm-4">Result</button>
-				<button class="btn btn-success col-sm-4">Profile</button>
+				<a href="teacher_tech.php"><button class="btn btn-success col-sm-4">Languages</button></a>
+				<a href="previous_project_list.php"><button class="btn btn-warning col-sm-4">Previous Project List</button></a>
+				<a href="new-add.php"><button class="btn btn-info col-sm-4">Result</button></a>
+				<a href="teacher_profile.php"><button class="btn btn-success col-sm-4">Profile</button></a>
 				<a href="login.php"><button class="btn btn-warning col-sm-4">Log out</button></a>
 			</aside>	
 
@@ -37,26 +45,24 @@
 		include_once("crud.php");
 		$crud = new crud();
 
-		$query = "SELECT event.event_id, participants.student_id, participants.project_id, participants.project_title, participants.category, participants.language, participants.add_prize FROM event INNER JOIN participants WHERE event.event_id=participants.event_id AND participants.event_id = 1";
+		$query = "SELECT * FROM result ORDER BY total DESC LIMIT 4";
 		$result = $crud->getData($query);
 		?>
 		<table border="1">
+		
+		<th> Project ID </th>
 		<th> Student ID </th>
-		<th> Project Title </th>
-		<th> Category </th>
-		<th> Language </th>
-		<th> Prize </th>
-		<th> Update </th>
+		<th> Total </th>
+		<!-- <th> Action </th> -->
 		<?php 
 		foreach ($result as $key => $res) 
 		{	
 			echo "<tr>";
+			
+			echo "<td>".$res['project_id']."</td>";
 			echo "<td>".$res['student_id']."</td>";
-			echo "<td>".$res['project_title']."</td>";
-			echo "<td>".$res['category']."</td>";
-			echo "<td>".$res['language']."</td>";
-			echo "<td>".$res['add_prize']."</td>";
-			echo "<td><a href=\"update.php?project_id=$res[project_id]\">Edit</a></td>";
+			echo "<td>".$res['total']."</td>";
+			// echo "<td><a href=\"calculate_result.php?project_id=$res[project_id]\">Edit</a></td>";
 			echo "</tr>";
 		}
 		echo "</table>";

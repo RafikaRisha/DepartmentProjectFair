@@ -41,31 +41,43 @@ if(!$_SESSION['email'])
 			</aside>	
 
 		<div id="content">
+		<form action="calculate_result.php" method="POST">
+		<input type="number" name="project_id" placeholder="Enter Project ID">
+		<input type="submit" name="Submit" value="Submit">
+		</form>
 		<?php
 		include_once("crud.php");
 		$crud = new crud();
 
-		$query = "SELECT * FROM project_result";
-		$result = $crud->getData($query);
+		if(isset($_POST['Submit']))
+		{	
+			$project_id = $_POST['project_id'];
+			$query = "SELECT * FROM project_result WHERE project_id='$project_id'";
+			$result = $crud->getData($query);
 		?>
 		<table border="1">
-		
 		<th> Project ID </th>
 		<th> Student ID </th>
 		<th> Marks </th>
 		<th> Action </th>
 		<?php 
+		$total = 0;
 		foreach ($result as $key => $res) 
 		{	
 			echo "<tr>";
-			
 			echo "<td>".$res['project_id']."</td>";
 			echo "<td>".$res['student_id']."</td>";
-			echo "<td>".$res['marks']."</td>";
-			echo "<td><a href=\"marksEntry.php?project_id=$res[project_id]\">Edit</a></td>";
+			echo "<td>".$res['marks']."</td>";	
 			echo "</tr>";
+			$total += $res['marks']  ;
 		}
+		
 		echo "</table>";
+		echo "<td><a href='result.php?project_id=$res[project_id]&student_id=$res[student_id]&total=$total'>Total Marks</a></td>";
+		// return $total;
+		echo "Total: ".$total;
+
+		}	
 		?>
 		
 		</div>
